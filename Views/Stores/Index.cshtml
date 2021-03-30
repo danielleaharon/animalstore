@@ -1,0 +1,178 @@
+﻿@model IEnumerable<Animal_Store.Models.Stores>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<head>
+    <meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+
+    <!-- JQUERY FROM GOOGLE API -->
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+
+    @*<script type="text/javascript">
+            $(function () {
+                $("#lets_search").bind('submit', function () {
+                    var value = $('#str').val();
+                    $.post('db_query.php', { value: value }, function (data) {
+                        $("#search_results").html(data);
+                    });
+                    return false;
+                });
+            });
+    </script>*@
+    <style>
+        body, html {
+            background-image: url("https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.0-9/118488382_4301304199940221_6771676968452391062_o.jpg?_nc_cat=110&_nc_sid=730e14&_nc_ohc=MZu1pku3QEwAX8rJxJo&_nc_ht=scontent.ftlv5-1.fna&oh=7909ece5cb935dde655f914276620a3b&oe=5F705DA3");
+        }
+        /* Set the size of the div element that contains the map */
+        #map {
+            height: 300px; /* The height is 400 pixels */
+            width: 50%; /* The width is the width of the web page */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        aside {
+            width: 30%;
+            padding-left: 15px;
+            margin-left: 15px;
+            float: right;
+            background-color: #F2C5D0;
+           /* #C7BFE6*/
+        }
+        #mySearchsu {
+            background-color: transparent;
+            border: none;
+        }
+
+            #mySearchsu:hover {
+                color: #000;
+                box-shadow: 3px 1rem 2rem rgba(2, 1, 1, 0.3);
+                transform: translateY(-0.5rem);
+                transition: all .5s;
+            }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center">Our stores</h1>
+    @if (ViewBag.Type == "admin")
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+<form action="/Stores/Search" method="get" id="mySearch">
+
+    <input class="Textshow" id="name" type="text" name="name" placeholder=" Store's name">
+    <input class="Textshow" id="Location" type="text" name="Location" placeholder=" Store location">
+    <input class="Textshow" id="count" type="number" name="count" placeholder="number of pets">
+    <button class="Textshow" id="mySearchsu" type="submit"><il class="fa fa-search" style="font-size:22px;"></il></button>
+
+</form>
+  
+    <br>
+    <br>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StoreName)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StoreName)
+                    </td>
+
+                    @if (ViewBag.Type == "admin" || (ViewBag.Type == "Owner" && item.StoreName == ViewBag.Name))
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                        </td>
+                    }
+                </tr>
+            }
+
+
+
+        </tbody>
+    </table>
+    <aside>
+        <p>
+            All stores opening hours: 10:00-20:00<br />
+            Sunday to Thursday. Not Including Holidays.<br />
+            Contact Us: 1-700-700-700<br />
+        </p>
+    </aside>
+    <br />
+    <br />
+    <div id="map"></div>
+    <script>
+            // Initialize and add the map
+            function initMap() {
+
+
+                var rishon = { lat: 31.990110, lng: 34.774020 };
+                var map = new google.maps.Map(
+                    document.getElementById('map'), { zoom: 8, center: rishon });
+
+                var marker = new google.maps.Marker({
+                    position: rishon,
+                    map: map
+                });
+                var haifa = { lat: 32.783274, lng: 34.964817 };
+
+                var marker = new google.maps.Marker({
+                    position: haifa,
+                    map: map
+                });
+                var tlv = { lat: 32.070390, lng: 34.783696 };
+
+                var marker = new google.maps.Marker({
+                    position: tlv,
+                    map: map
+                });
+                var jerusalem = { lat: 31.751262, lng: 35.190330 };
+
+                var marker = new google.maps.Marker({
+                    position: jerusalem,
+                    map: map
+                });
+                var hadera = { lat: 32.433246, lng: 34.921071 };
+
+                var marker = new google.maps.Marker({
+                    position: hadera,
+                    map: map
+                });
+
+
+            }
+    </script>
+    <script defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCP7hn4bADqG2MI0DBdRczSiSN-nzGJojM&callback=initMap">
+    </script>
+
+</body>
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

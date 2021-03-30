@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Animal_Store.Models.wish_list>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.pet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Customer)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.pet.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.ID)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.CustomerId, id2 = item.PetsId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.CustomerId, id2 = item.PetsId }) |
+                @Html.ActionLink("Delete", "Delete", new {  id=item.CustomerId ,id2=item.PetsId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

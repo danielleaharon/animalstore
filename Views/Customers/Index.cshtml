@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Animal_Store.Models.Customer>
+
+@{
+    ViewData["Title"] = "Index";
+}
+    <html>
+    <head>
+        <style>
+            body, html {
+                background-image: url("https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.0-9/118488382_4301304199940221_6771676968452391062_o.jpg?_nc_cat=110&_nc_sid=730e14&_nc_ohc=MZu1pku3QEwAX8rJxJo&_nc_ht=scontent.ftlv5-1.fna&oh=7909ece5cb935dde655f914276620a3b&oe=5F705DA3");
+            }
+            #mySearchsu {
+                background-color: transparent;
+                border: none;
+            }
+
+                #mySearchsu:hover {
+                    color: #000;
+                    box-shadow: 3px 1rem 2rem rgba(2, 1, 1, 0.3);
+                    transform: translateY(-0.5rem);
+                    transition: all .5s;
+                }
+        </style>
+
+    </head>
+    <body>
+        <h1>All Custumer</h1>
+        <br />
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+
+        <form class="product__list__item--icons" action="/Customers/SearchCustomer" method="get" id="mySearch">
+
+            <input class="Textshow" id="CustumerName" type="text" name="CustumerName" placeholder=" Custumer name">
+            <input class="Textshow" id="CustumerUser" type="text" name="CustumerUser" placeholder=" Custumer user name">
+            <input class="Textshow" id="Typeuser" type="text" name="Typeuser" placeholder="Type of user">
+            <button id="mySearchsu" type="submit"><il class="fa fa-search" style="font-size:22px;"></il></button>
+        </form>
+        <br />
+        <br />
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Username)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Usertype)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Username)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Usertype)
+                        </td>
+                        <td>
+
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                            @if (item.Usertype == "userRegistered")
+                            {
+                                <a>|</a>
+                                <a asp-controller="Pets" asp-action="ShowWish" asp-route-id="@item.ID">ShowWish</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </body>
+    </html>

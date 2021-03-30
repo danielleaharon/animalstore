@@ -1,0 +1,57 @@
+﻿@model Animal_Store.Models.Customer
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<head>
+    <style>
+        body, html {
+            background-image: url("https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.0-9/118448674_4301437069926934_1943137070436079307_o.jpg?_nc_cat=106&_nc_sid=730e14&_nc_ohc=v-COU9FIKgkAX9wmU5l&_nc_ht=scontent.ftlv5-1.fna&oh=35a50fcbe6862ab3046443ffe7830f14&oe=5F6CD36D")
+        }
+        #example1 {
+            border: 2px solid black;
+            padding: 10px;
+            margin:auto;
+            background-color:white;
+            border-radius: 25px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+
+    <br />
+    <br />
+    <form action="/Customers/Login" method="get" style="text-align:center">
+
+        <input id="example1" type="text" name="userName" placeholder=" User Name">
+
+        <a style="color:red; font-size:18px"> @ViewBag.ErrorUser</a>
+        <br />
+        <br />
+        <input id="example1" type="password" name="pass" placeholder="password">
+
+        <a style="color:red; font-size:18px">@ViewBag.ErrorPass</a>
+        <br />
+        <br />
+        <input id="example1" type="submit" value="Login">
+        <a id="example1" asp-action="Register">Register</a>
+
+    </form>
+
+   
+    @*<form action="/Customers/Register" method="get">
+
+        <input id="example1" type="submit" value="Register">
+
+    </form>*@
+
+    <div>
+
+    </div>
+</body>
+</html>

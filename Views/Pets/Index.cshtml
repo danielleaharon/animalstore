@@ -1,0 +1,254 @@
+﻿@model IEnumerable<Animal_Store.Models.Pets>
+
+
+
+
+<head>
+    @*<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.11/css/all.css" integrity="sha384-p2jx59pefphTFIpeqCcISO9MdVfIm4pNnsL08A6v5vaQc4owkQqxMV8kg4Yvhaw/" crossorigin="anonymous">*@
+
+    <style>
+        body, html {
+            background-image: url("https://scontent.ftlv5-1.fna.fbcdn.net/v/t1.0-9/118444013_4301187559951885_1583499622597631922_o.jpg?_nc_cat=102&_nc_sid=730e14&_nc_ohc=xCNdB3915y0AX-Hdg-Z&_nc_ht=scontent.ftlv5-1.fna&oh=ffc5bb294f5fe6f96855b35e5d860a76&oe=5F6E5D8A");
+       }
+
+        .img1 {
+            /* width: 100px;
+            height: 70px;*/
+            transition: width 2s, height 4s;
+        }
+
+            .img1:hover {
+                width: 300px;
+                height: 250px;
+            }
+
+        button {
+            background-color: Transparent;
+        }
+
+        .scroll-left {
+            height: 50px;
+            overflow: hidden;
+            position: relative;
+        }
+
+            .scroll-left p {
+                margin-left: 2.5em;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                font-size: 22px;
+                color: #7092be;
+                line-height: 50px;
+                font-weight: bold;
+                font-family: Narkisim;
+                text-align: center;
+                /* Starting position */
+                -moz-transform: translateX(100%);
+                -webkit-transform: translateX(100%);
+                transform: translateX(100%);
+                /* Apply animation to this element */
+                -moz-animation: scroll-left 20s linear infinite;
+                -webkit-animation: scroll-left 20s linear infinite;
+                animation: scroll-left 20s linear infinite;
+            }
+        /* Move it (define the animation) */
+        @@-moz-keyframes scroll-left {
+            0% {
+                -moz-transform: translateX(100%);
+            }
+
+            100% {
+                -moz-transform: translateX(-100%);
+            }
+        }
+
+        @@-webkit-keyframes scroll-left {
+            0% {
+                -webkit-transform: translateX(100%);
+            }
+
+            100% {
+                -webkit-transform: translateX(-100%);
+            }
+        }
+
+        @@keyframes scroll-left {
+            0% {
+                -moz-transform: translateX(100%); /* Browser bug fix */
+                -webkit-transform: translateX(100%); /* Browser bug fix */
+                transform: translateX(100%);
+            }
+
+            100% {
+                -moz-transform: translateX(-100%); /* Browser bug fix */
+                -webkit-transform: translateX(-100%); /* Browser bug fix */
+                transform: translateX(-100%);
+            }
+         
+        }
+      
+    
+        #mySearchsu {
+            background-color: transparent;
+            border: none;
+        }
+        #mySearchsu:hover {
+            color: #000;
+            box-shadow: 3px 1rem 2rem rgba(2, 1, 1, 0.3);
+            transform: translateY(-0.5rem);
+            transition: all .5s;
+        }
+    </style>
+</head>
+<body>
+    <!-- HTML -->
+    @if (ViewBag.chosenType != null)
+    {
+        <div class="scroll-left">
+
+            <p>s a l e!  &nbsp  &nbsp s a l e!  &nbsp &nbsp   s a l e! &nbsp &nbsp only today on @ViewBag.chosenType 50% price </p>
+        </div>
+    }
+    @if (ViewBag.myWish == null)
+    {
+        <h1>Our animals</h1>
+    }
+    else
+    {
+        <h1>@ViewBag.myWish</h1>
+    }
+    @if (ViewBag.Type == "admin" && ViewBag.myWish==null)
+    {
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    }
+    <br />
+    <br />
+    @if (ViewBag.myWish == null)
+    {
+        <form class="product__list__item--icons" action="/Pets/SearchPets" method="get" id="mySearch">
+
+            <input class="Textshow" type="text" name="storeName" placeholder=" Store's name...">
+            <input class="Textshow" type="text" name="PetsType" placeholder=" pets type...">
+            <input class="Textshow" type="text" name="Gender" placeholder="Gender...">
+            <input class="Textshow" type="number" name="age" placeholder="age...">
+            <button class="Textshow" id="mySearchsu" type="submit"><il class="fa fa-search" style="font-size:22px;"></il></button>
+
+        </form>
+    <br>
+    <br>
+    <form action="/Pets/groupbyGender" method="get" id="mySearch">
+
+        <label for="groupbyGender">Choose a Group:</label>
+        <select class="Textshow" name="groupby" id="groupby">
+            <option id="Type" value="Type">Type</option>
+            <option id="Gender" value="Gender">Gender</option>
+            <option id="storeName" value="storeName">Stroe Name</option>
+        </select>
+        <button class="Textshow" id="mySearchsu" type="submit"><il class="fa fa-group" style="font-size:22px;"></il></button>
+    </form>
+    <br>
+    <br>
+    }
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Gender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Age)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Store)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Age)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Store.StoreName)
+                    </td>
+                    <td>
+
+                        @*<div class="img1" style="background-image:url(@item.img)">
+
+                            </div>*@
+                        <img class="img1" src=@item.img width="100" height="70">
+
+
+                    </td>
+                    @if (ViewBag.Type == "admin" || (ViewBag.Type == "Owner" && item.Store.StoreName == ViewBag.Name))
+                    {
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+                        </td>
+                    }
+                    else @if (ViewBag.Type == "userRegistered")
+               {
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">Details </a> |
+
+                    @if (item.wish_list.ToList().Count == 0)
+                    {
+
+                        <a id="like" asp-controller="wish_list" asp-action="Create2" asp-route-PetsId="@item.ID" asp-route-CustomerId="@ViewBag.Id"><i class="far fa-heart" style="color:black"></i></a>
+
+                    }
+                    else
+                    {
+
+                        @if (item.wish_list.FirstOrDefault(w => w.CustomerId == ViewBag.Id && w.PetsId == item.ID) != null)
+                        {
+                            <a asp-controller="wish_list" asp-action="Delete2" asp-route-PetsId="@item.ID" asp-route-CustomerId="@ViewBag.Id"><i class="fas fa-heart" style="color:hotpink"></i></a>
+
+                        }
+                        else
+                        {
+                            <a asp-controller="wish_list" asp-action="Create2" asp-route-PetsId="@item.ID" asp-route-CustomerId="@ViewBag.Id"><i class="far fa-heart" style="color:black"></i></a>
+                        }
+
+                    }
+                </td>
+
+            }
+            else
+            {
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a>
+                </td>
+            }
+
+
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}

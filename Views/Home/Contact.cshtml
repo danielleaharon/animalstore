@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<h1>Tip</h1>
+<html>
+
+<head>
+    <style>
+    body, html { background-image: url("https://scontent.fhfa1-2.fna.fbcdn.net/v/t1.0-9/118764824_4321252664612041_4462454736031115985_o.jpg?_nc_cat=108&_nc_sid=730e14&_nc_ohc=ebBxd4YRORwAX9ifm5N&_nc_ht=scontent.fhfa1-2.fna&oh=9a0d04675b7db2c0aea5b113b92c5dc2&oe=5F7383D4"); }
+        section {
+            column-count: 4;
+        }
+
+        h2 {
+            font-family: myFirstFont;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <h2>  Summer days are here!</h2>
+    <section>
+
+        Be Aware of taking out your dog times. Dogs Suffer a lot  when it’s hot outside.<br />
+
+        We Recommend of After-Sunset hours as the best time for a walk. Notice that there are less than 30 degrees!
+        Be Aware that your pet’s water jar is always full of water!
+    </section>
+
+    <br />
+    <br />
+    <br />
+
+
+    <a class="weatherwidget-io" href="https://forecast7.com/en/32d0934d78/tel-aviv-yafo/" data-label_1="TEL AVIV" data-label_2="WEATHER" data-theme="original">TEL AVIV WEATHER</a>
+    <script>
+        !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = 'https://weatherwidget.io/js/widget.min.js'; fjs.parentNode.insertBefore(js, fjs); } }(document, 'script', 'weatherwidget-io-js');
+    </script>
+    <br />
+    <br />
+    <canvas id="myCanvas" width="700" height="80" style="border:none solid #000000;">
+    </canvas>
+    <script>
+        var c = document.getElementById("myCanvas");
+        var ctx = c.getContext("2d");
+        ctx.font = "30px Narkisim";
+        ctx.fillText("Let's be our friends and keep following-->", 10, 50);
+    </script>
+
+ 
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="mSDJsLDq"></script>
+    <div class="fb-like" data-href="https://www.facebook.com/Animal_Store-109014960924628/" data-width="" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+
+</body>
+</html>
